@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Canvas Kalp Animasyonu</title>
+</head>
+<body>
+<canvas id="canvas" width="400" height="400"></canvas>
+
+<script>
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+
+function drawHeart(scale) {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.save();
+  ctx.translate(200, 200);
+  ctx.scale(scale, scale);
+  ctx.beginPath();
+  ctx.moveTo(0, -50);
+  ctx.bezierCurveTo(50, -100, 150, -20, 0, 100);
+  ctx.bezierCurveTo(-150, -20, -50, -100, 0, -50);
+  ctx.fillStyle = "red";
+  ctx.fill();
+  ctx.restore();
+}
+
+let t = 0;
+function animate() {
+  t += 0.05;
+  const scale = 1 + 0.1 * Math.sin(t * 5); // kalp atışı efekti
+  drawHeart(scale);
+  requestAnimationFrame(animate);
+}
+
+animate();
+</script>
+</body>
+</html>
