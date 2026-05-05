@@ -38,15 +38,27 @@
             z-index: 100;
         }
 
-        .logo {
+        /* Logo Tasarımı */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px; 
+            text-decoration: none;
+        }
+
+        .nav-logo {
+            height: 40px; 
+            width: auto;
+        }
+
+        .logo-text {
             font-size: 1.8rem;
             font-weight: bold;
             color: var(--text-color);
-            text-decoration: none;
             letter-spacing: 2px;
         }
 
-        .logo span {
+        .logo-text span {
             color: var(--primary-color);
         }
 
@@ -70,7 +82,7 @@
         /* Hero Section */
         .hero {
             height: 100vh;
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1555626906-fcf10d6851b4?q=80&w=1920&auto=format&fit=crop') center/cover;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('arkaplan.jpg') center/cover;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -108,8 +120,6 @@
             transition: background-color 0.3s ease, transform 0.2s ease;
             opacity: 0;
             animation: fadeUp 1s forwards 1.1s;
-            cursor: pointer;
-            border: none;
         }
 
         .btn:hover {
@@ -189,9 +199,54 @@
             color: white;
         }
 
+        /* --- YENİ EKLENEN: Satış Rakamları Bölümü --- */
+        .sales-stats {
+            padding: 5rem 5%;
+            background-color: #181818; /* Modeller bölümünden hafifçe ayrışması için */
+            text-align: center;
+        }
+
+        .sales-stats h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .stat-box {
+            background-color: #1e1e1e;
+            padding: 40px 20px;
+            border-radius: 10px;
+            border-bottom: 4px solid var(--primary-color);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-box:hover {
+            transform: translateY(-10px);
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        .stat-text {
+            font-size: 1.1rem;
+            color: #aaaaaa;
+        }
+        /* ------------------------------------------- */
+
         /* Modal (Açılır Pencere) Tasarımı */
         .modal {
-            display: none; /* Varsayılan olarak gizli */
+            display: none;
             position: fixed;
             z-index: 1000;
             left: 0;
@@ -280,7 +335,6 @@
             text-align: center;
             padding: 2rem;
             background-color: #0a0a0a;
-            margin-top: 2rem;
         }
 
         /* Animations */
@@ -304,11 +358,15 @@
 <body>
 
     <header>
-        <a href="#" class="logo">BMW<span>M</span></a>
+        <a href="#" class="logo-container">
+            <img src="logo.png" alt="BMW Logo" class="nav-logo">
+            <span class="logo-text">BMW<span>M</span></span>
+        </a>
         <nav>
             <ul>
                 <li><a href="#home">Ana Sayfa</a></li>
                 <li><a href="#models">Modeller</a></li>
+                <li><a href="#sales">Rakamlar</a></li> <!-- MENÜYE EKLENDİ -->
                 <li><a href="#contact">İletişim</a></li>
             </ul>
         </nav>
@@ -324,18 +382,18 @@
         <h2>Öne Çıkan Modeller</h2>
         <div class="grid">
             <div class="card">
-                <img src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?q=80&w=800&auto=format&fit=crop" alt="BMW M3">
+                <img src="m3.jpg" alt="BMW M3">
                 <div class="card-content">
                     <div>
                         <h3>BMW M3 Competition</h3>
                         <p>Pist performansı günlük kullanımla buluşuyor. 510 beygir gücündeki bu canavarla tanışın.</p>
                     </div>
+                    <button class="card-btn" id="open-m3-modal">Detayları İncele</button>
                 </div>
             </div>
             
-            <!-- BMW i8 Kartı Güncellendi -->
             <div class="card">
-                <img src="https://images.unsplash.com/photo-1607853202273-797f1c22a38e?q=80&w=800&auto=format&fit=crop" alt="BMW i8">
+                <img src="i8.jpg" alt="BMW i8">
                 <div class="card-content">
                     <div>
                         <h3>BMW i8</h3>
@@ -346,13 +404,37 @@
             </div>
 
             <div class="card">
-                <img src="https://images.unsplash.com/photo-1617531653332-bd46c24f2068?q=80&w=800&auto=format&fit=crop" alt="BMW M5">
+                <img src="m5.jpg" alt="BMW M5">
                 <div class="card-content">
                     <div>
                         <h3>BMW M5 CS</h3>
                         <p>Lüks bir sedanın içinde yatan safkan bir yarış aracı. Gücün zirvesi.</p>
                     </div>
+                    <button class="card-btn" id="open-m5-modal">Detayları İncele</button>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- YENİ EKLENEN BÖLÜM: Satış İstatistikleri -->
+    <section class="sales-stats" id="sales">
+        <h2>Global Başarı ve Rakamlar</h2>
+        <div class="stats-grid">
+            <div class="stat-box">
+                <div class="stat-number">2.5M+</div>
+                <div class="stat-text">Yıllık Küresel Araç Teslimatı</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">%74</div>
+                <div class="stat-text">Tam Elektrikli (BEV) Satış Büyümesi</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">200K+</div>
+                <div class="stat-text">Yıllık BMW M Modeli Satışı</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">140+</div>
+                <div class="stat-text">Resmi Satış Yapılan Ülke</div>
             </div>
         </div>
     </section>
@@ -361,20 +443,39 @@
         <p>&copy; 2026 BMW Tutkusu Projesi. GitHub Pages üzerinde barındırılmaktadır.</p>
     </footer>
 
-    <!-- BMW i8 Detay Modalı -->
+    <!-- M3 Modal -->
+    <div id="m3-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="close-m3-modal">&times;</span>
+            <div class="modal-body">
+                <img src="m3.jpg" alt="BMW M3 Detay">
+                <div class="modal-info">
+                    <h3>BMW M3 Competition</h3>
+                    <p>Agresif tasarımı ve efsanevi yol tutuşu ile adrenalin arayanların ilk tercihi.</p>
+                    <ul>
+                        <li><strong>Motor:</strong> 3.0 Litre 6 Silindirli M TwinPower Turbo</li>
+                        <li><strong>Güç:</strong> 510 Beygir (HP)</li>
+                        <li><strong>0-100 km/s Hızlanma:</strong> 3.9 Saniye</li>
+                        <li><strong>Çekiş:</strong> Arkadan itiş veya M xDrive Dört Tekerlekten Çekiş</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- i8 Modal -->
     <div id="i8-modal" class="modal">
         <div class="modal-content">
             <span class="close-btn" id="close-i8-modal">&times;</span>
             <div class="modal-body">
-                <img src="https://images.unsplash.com/photo-1607853202273-797f1c22a38e?q=80&w=800&auto=format&fit=crop" alt="BMW i8 Detay">
+                <img src="i8.jpg" alt="BMW i8 Detay">
                 <div class="modal-info">
                     <h3>BMW i8 Plug-in Hybrid</h3>
-                    <p>BMW'nin "Project i" vizyonunun en ikonik temsilcisi. Karbon fiber takviyeli plastik gövdesi ve yukarı açılan "kelebek" kapılarıyla sadece bir otomobil değil, bir tasarım şaheseridir.</p>
+                    <p>BMW'nin "Project i" vizyonunun en ikonik temsilcisi. Karbon fiber gövdesiyle bir tasarım şaheseri.</p>
                     <ul>
-                        <li><strong>Motor:</strong> 1.5L 3 Silindirli TwinPower Turbo + Elektrik Motoru</li>
+                        <li><strong>Motor:</strong> 1.5L 3 Silindirli Turbo + Elektrik Motoru</li>
                         <li><strong>Toplam Güç:</strong> 374 Beygir (HP)</li>
                         <li><strong>0-100 km/s Hızlanma:</strong> 4.4 Saniye</li>
-                        <li><strong>Maksimum Hız:</strong> 250 km/s (Elektronik Sınırlandırılmış)</li>
                         <li><strong>Gövde:</strong> Karbon fiber takviyeli yolcu hücresi (CFRP)</li>
                     </ul>
                 </div>
@@ -382,8 +483,28 @@
         </div>
     </div>
 
+    <!-- M5 Modal -->
+    <div id="m5-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="close-m5-modal">&times;</span>
+            <div class="modal-body">
+                <img src="m5.jpg" alt="BMW M5 Detay">
+                <div class="modal-info">
+                    <h3>BMW M5 CS</h3>
+                    <p>Bugüne kadar üretilmiş en güçlü BMW M modeli. Konfor ve inanılmaz bir pist performansı bir arada.</p>
+                    <ul>
+                        <li><strong>Motor:</strong> 4.4 Litre V8 M TwinPower Turbo</li>
+                        <li><strong>Güç:</strong> 635 Beygir (HP)</li>
+                        <li><strong>0-100 km/s Hızlanma:</strong> 3.0 Saniye</li>
+                        <li><strong>Ağırlık Azaltma:</strong> Yoğun karbon fiber parçalar</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // Smooth Scrolling
+        // Smooth Scrolling (Yeni eklenen "Rakamlar" bölümü için de otomatik çalışır)
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -393,26 +514,31 @@
             });
         });
 
-        // Modal (Açılır Pencere) İşlemleri
-        const modal = document.getElementById("i8-modal");
-        const btn = document.getElementById("open-i8-modal");
-        const span = document.getElementById("close-i8-modal");
+        const m3Modal = document.getElementById("m3-modal");
+        const i8Modal = document.getElementById("i8-modal");
+        const m5Modal = document.getElementById("m5-modal");
 
-        // Butona tıklayınca modalı aç
-        btn.onclick = function() {
-            modal.classList.add("show");
-        }
+        const btnM3 = document.getElementById("open-m3-modal");
+        const btnI8 = document.getElementById("open-i8-modal");
+        const btnM5 = document.getElementById("open-m5-modal");
 
-        // X işaretine tıklayınca modalı kapat
-        span.onclick = function() {
-            modal.classList.remove("show");
-        }
+        const closeM3 = document.getElementById("close-m3-modal");
+        const closeI8 = document.getElementById("close-i8-modal");
+        const closeM5 = document.getElementById("close-m5-modal");
 
-        // Modalın dışındaki siyah alana tıklayınca modalı kapat
+        btnM3.onclick = function() { m3Modal.classList.add("show"); }
+        closeM3.onclick = function() { m3Modal.classList.remove("show"); }
+
+        btnI8.onclick = function() { i8Modal.classList.add("show"); }
+        closeI8.onclick = function() { i8Modal.classList.remove("show"); }
+
+        btnM5.onclick = function() { m5Modal.classList.add("show"); }
+        closeM5.onclick = function() { m5Modal.classList.remove("show"); }
+
         window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.classList.remove("show");
-            }
+            if (event.target == m3Modal) { m3Modal.classList.remove("show"); }
+            if (event.target == i8Modal) { i8Modal.classList.remove("show"); }
+            if (event.target == m5Modal) { m5Modal.classList.remove("show"); }
         }
     </script>
 </body>
